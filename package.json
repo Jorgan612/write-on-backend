@@ -8,7 +8,7 @@
     "dev": "node --watch index.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Jessica Organ",
   "license": "ISC",
   "type": "commonjs",
   "description": "",
