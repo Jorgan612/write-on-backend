@@ -11,9 +11,13 @@ app.use(cors({
 
 app.use(express.json());
 
-app.get('/api/status', (req, res) => {
+app.get('/', (req, res) => {
     res.send({message: 'Hello from the backend!'});
 });
+
+const userRouter = require('./routes/users');
+
+app.use('/users', userRouter);
 
 app.listen(PORT, ()=> {
     console.log(`Server is running on http://localhost:${PORT}`);
