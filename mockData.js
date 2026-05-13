@@ -45,6 +45,8 @@ const UsersList = [
             type: 'word(s)'
         }],
         entries: [],
+        milestones: [],
+        achievements: []
     },
     {
         id: 311,
