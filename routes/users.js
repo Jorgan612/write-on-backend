@@ -16,8 +16,10 @@ router.post('/login', async (req, res) => {
         return res.status(400). json({message: 'User not found'});
     }
 
-    const isMatch = (password === user.password);
-    // const isMatch = await bcrypt.compare(password, user.password);
+    
+    const compatibleHash = user.password.replace(/^\$2b\$/, '$2a$');
+
+    const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
         return res.status(400).json({message: 'Invalid credentials'});
     }
