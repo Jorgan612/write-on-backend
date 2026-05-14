@@ -1,6 +1,42 @@
 const UsersList = require('../mockData.js');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 const express = require('express');
 const router = express.Router();
+
+router.post('/login', async (req, res) => {
+    const { email, password } = req.body;
+
+    console.log("Login Attempt Email:", email);
+    console.log("Available Users:", UsersList.map(u => u.email));
+
+
+    const user = UsersList.find((user) => {
+        return user.email.toLowerCase().trim() === email.toLowerCase().trim();
+    })
+
+    if (!user) {
+        return res.status(400). json({message: 'User not found'});
+    }
+
+    const isMatch = (password === user.password);
+    // const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+        return res.status(400).json({message: 'Invalid credentials'});
+    }
+
+    const token = jwt.sign(
+        {id: user.id},
+        process.env.JWT_SECRET,
+        {expiresIn: '1h'}
+    );
+
+    const { password: _, ...userWithoutPassword } = user;
+    res.json({
+        token,
+        user: userWithoutPassword
+    });
+});
 
 router.get('/', (req, res) => {
     if (!UsersList) {
