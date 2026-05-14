@@ -15,7 +15,6 @@ router.post('/login', async (req, res) => {
     if (!user) {
         return res.status(400). json({message: 'User not found'});
     }
-
     
     const compatibleHash = user.password.replace(/^\$2b\$/, '$2a$');
 
@@ -27,7 +26,7 @@ router.post('/login', async (req, res) => {
     const token = jwt.sign(
         {id: user.id},
         process.env.JWT_SECRET,
-        {expiresIn: '1h'}
+        {expiresIn: '30d'}
     );
 
     const { password: _, ...userWithoutPassword } = user;
