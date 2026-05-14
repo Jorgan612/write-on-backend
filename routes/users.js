@@ -7,10 +7,6 @@ const router = express.Router();
 router.post('/login', async (req, res) => {
     const { email, password } = req.body;
 
-    console.log("Login Attempt Email:", email);
-    console.log("Available Users:", UsersList.map(u => u.email));
-
-
     const user = UsersList.find((user) => {
         return user.email.toLowerCase().trim() === email.toLowerCase().trim();
     })
