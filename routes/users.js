@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const express = require('express');
 const router = express.Router();
+const verifyToken =  require('../middleware/auth.js');
 
 router.post('/login', async (req, res) => {
     const { email, password } = req.body;
@@ -34,7 +35,7 @@ router.post('/login', async (req, res) => {
     });
 });
 
-router.get('/', (req, res) => {
+router.get('/', verifyToken, (req, res) => {
     if (!UsersList) {
         return res.status(404).json({error: "No users found."});
     }
