@@ -36,6 +36,53 @@ router.post('/login', async (req, res) => {
     });
 });
 
+router.post('/signup', async (req, res) => {
+    try {
+        const { email, password, username, pronouns, bio, website, socials, goals } = req.body;
+
+        const existingUser = await UsersList.find(user => user.email.toLowerCase() === email.toLowerCase());
+        if (existingUser) {
+            return res.status(400).json({ message: 'An account with this email already exists.'});
+        }
+
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(password, salt);
+
+        const newUser = {
+            id: Date.now(),
+            email,
+            username,
+            password: hashedPassword,
+            pronouns,
+            bio,
+            website,
+            socials,
+            goals,
+            entries: [],
+            joined: new Date()
+        };
+
+        UsersList.push(newUser);
+
+        const token = jwt.sign({ id: newUser.id }, process.env.JWT_SECRET, {expiresIn: '30d' });
+
+        res.status(201).json({
+            token, 
+            user: {
+                id: newUser.id,
+                email: newUser.email,
+                username: newUser.username,
+                goals: newUser.goals,
+                socials: newUser.socials,
+                entries: newUser.entries
+            }
+        });
+
+    } catch (err) {
+        res.status(500).json({ message: 'Server error during registration.' });
+    }
+});
+
 router.get('/', verifyToken, (req, res) => {
     if (!UsersList) {
         return res.status(404).json({error: "No users found."});
