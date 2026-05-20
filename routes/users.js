@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 const express = require('express');
 const router = express.Router();
 const verifyToken =  require('../middleware/auth.js');
+const { sendConfirmationEmail } = require('../utils/mailer.js');
 
 router.post('/login', async (req, res) => {
     const { email, password } = req.body;
@@ -65,6 +66,8 @@ router.post('/signup', async (req, res) => {
         UsersList.push(newUser);
 
         const token = jwt.sign({ id: newUser.id }, process.env.JWT_SECRET, {expiresIn: '30d' });
+
+        sendConfirmationEmail(newUser.email, newUser.username);
 
         res.status(201).json({
             token, 
