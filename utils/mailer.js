@@ -16,7 +16,7 @@ const sendConfirmationEmail = async (toEmail, username) => {
             to: toEmail,
             subject: 'Welcome to Write On!',
             html: `
-                <div> style="font-family: sans-serif; padding: 20px; color: #333">
+                <div style="font-family: sans-serif; padding: 20px; color: #333;">
                     <h2>Hi ${username},</h2>
                     <p>Your account has been successfully created.</p>
                     <p>Log in anytime to track your daily word count and make progress towards your writing goals!</p>
