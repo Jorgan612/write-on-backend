@@ -1,7 +1,7 @@
 const nodemailer = require('nodemailer');
 
 const transporter = nodemailer.createTransport({
-    host: process.emitWarning.EMAIL_HOST,
+    host: process.env.EMAIL_HOST,
     port: process.env.EMAIL_PORT,
     auth: {
         user: process.env.EMAIL_USER,
@@ -20,7 +20,7 @@ const sendConfirmationEmail = async (toEmail, username) => {
                     <h2>Hi ${username},</h2>
                     <p>Your account has been successfully created.</p>
                     <p>Log in anytime to track your daily word count and make progress towards your writing goals!</p>
-                    </br>
+                    <br>
                     <p>- The Write On Team</p>
                 </div>
             `
