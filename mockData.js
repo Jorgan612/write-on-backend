@@ -1,6 +1,7 @@
 const UsersList = [
     {
         id: 612,
+        isVerified: false,
         name: 'Jessica',
         username: 'Jesso',
         email: 'Jorgan612@gmail.com',
@@ -50,6 +51,7 @@ const UsersList = [
     },
     {
         id: 311,
+        isVerified: false,
         name: 'Max',
         username: 'MaxExplores',
         email: 'mhenry091@gmail.com',
@@ -97,6 +99,7 @@ const UsersList = [
     },
     {
         id: 123,
+        isVerified: false,
         name: 'Misery Lark',
         username: 'MiseryLovesCompany',
         email: 'mLark@gmail.com',
@@ -144,6 +147,7 @@ const UsersList = [
     },
     {
         id: 1774,
+        isVerified: false,
         name: 'Jamie',
         username: 'JamieFrayfray',
         email: 'JamieFrayfray@gmail.com',
@@ -191,6 +195,7 @@ const UsersList = [
     },
     {
         id: 1818,
+        isVerified: false,
         name: 'Frankenstein',
         username: 'Frankie',
         email: 'FrankieStein@gmail.com',
@@ -234,6 +239,7 @@ const UsersList = [
     },
     {
         id: 1993,
+        isVerified: false,
         name: 'Dr. Grant',
         username: 'Bone Guy',
         email: 'thedrgrant@gmail.com',
@@ -281,6 +287,7 @@ const UsersList = [
     },
     {
         id: 1001,
+        isVerified: false,
         name: 'Sherlock Holmes',
         username: '000HighFunctioningSociopath000',
         email: '221b-baker@consulting-detective.uk',
@@ -328,6 +335,7 @@ const UsersList = [
     },
     {
         id: 1937,
+        isVerified: false,
         name: 'Bilbo Baggins',
         username: 'SecondBreakfastLover',
         email: 'burglar_not_really@theshire.com',
@@ -375,6 +383,7 @@ const UsersList = [
     },
     {
         id: 1979,
+        isVerified: false,
         name: 'Arthur Dent',
         username: 'AlwaysConfused',
         email: 'tea-less-arthur@galactic-highway.com',
@@ -422,6 +431,7 @@ const UsersList = [
     },
     {
         id: 1865,
+        isVerified: false,
         name: 'Alice Liddell',
         username: 'CuriouserAndCuriouser',
         email: 'tea-party-guest@wonderland.net',
@@ -469,6 +479,7 @@ const UsersList = [
     },
     {
         id: 1997,
+        isVerified: false,
         name: 'Ron Weasley',
         username: 'KingWeasley',
         email: 'spider-hater-97@owlpost.wiz',
@@ -516,6 +527,7 @@ const UsersList = [
     },
     {
         id: 1813,
+        isVerified: false,
         name: 'Elizabeth Bennet',
         username: 'Headstrong_Lizzy',
         email: 'tolerable-but-not-handsome@longbourn.com',
