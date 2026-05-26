@@ -46,4 +46,38 @@ const sendConfirmationEmail = async (toEmail, username, token) => {
     }
 };
 
-module.exports = { sendConfirmationEmail };
+const sendPasswordResetEmail = async (toEmail, token) => {
+    try {
+        const resetUrl = `http://localhost:3000/reset-password?token=${token}`;
+
+        const mailOptions = {
+            from: '"Write On App" <welcome@writeonapp.com>',
+            to: toEmail,
+            subject: 'Reset your Write On Password',
+            html: `
+                <div style="font-family: sans-serif; padding: 20px; color: #333;">
+                    <h2>Password Reset Request</h2>
+                    <p>We received a request to reset the password for your Write On account.</p>
+                    <p>Click the button below to choose a new password. This link will expire in 1 hour.</p>
+                    <br>
+                    <p style="margin: 20px 0;">
+                        <a href="${resetUrl}" style="background-color: #263b56; color: #94a3b8; font-weight: bold; padding: 30px 30px; text-decoration: none; border-radius: 5px;">
+                            Reset Password
+                        </a>
+                    </p>
+                    <br>
+                    <p>If you didn't request this, you can safely ignore this email.</p>
+                    <br>
+                    <p>- The Write On Team</p>
+                </div>
+            `
+        };
+
+        await transporter.sendMail(mailOptions);
+        console.log('Password reset email sent succssfully');
+    } catch (err) {
+        console.error('Failed to dispatch password reset email:', err);
+    }
+}
+
+module.exports = { sendConfirmationEmail, sendPasswordResetEmail };
