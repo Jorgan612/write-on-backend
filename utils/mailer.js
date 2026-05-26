@@ -1,0 +1,49 @@
+const nodemailer = require('nodemailer');
+
+const transporter = nodemailer.createTransport({
+    host: process.env.EMAIL_HOST,
+    port: process.env.EMAIL_PORT,
+    auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS
+    }
+});
+
+const sendConfirmationEmail = async (toEmail, username, token) => {
+    try {
+
+        const verificationUrl = `http://localhost:${process.env.PORT || 5000}/users/verify/${token}`;
+
+        const mailOptions = {
+            from: '"Write On App" <welcome@writeonapp.com>',
+            to: toEmail,
+            subject: 'Welcome to Write On!',
+            html: `
+                <div style="font-family: sans-serif; padding: 20px; color: #333;">
+                    <h2>Hi ${username},</h2>
+                    <p>Your account has been successfully created.</p>
+                    <p>Please click the link below to verify your email address and activate your account:</p>
+                    <br>
+                    <p style="margin: 20px 0;">
+                        <a href="${verificationUrl}" style="background-color: #263b56; color: #94a3b8; font-size: 20px; font-weight: bold; padding: 20px 20px; text-decoration: none; border-radius: 5px;">
+                            Verify Email
+                        </a>
+                    </p>
+                    <br>
+                    <p>If the button doesn't work, copy and paste this link into your browser:</p>
+                    <p>${verificationUrl}</p>
+                    <br>
+                    <p>- The Write On Team</p>
+                </div>
+            `
+        };
+
+        const info = await transporter.sendMail(mailOptions);
+        console.log('Email send successfully:', info.messageId);
+        return info;
+    } catch (err) {
+        console.error('Failed to dispatch notification email:', err);
+    }
+};
+
+module.exports = { sendConfirmationEmail };
