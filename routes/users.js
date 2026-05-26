@@ -1,6 +1,7 @@
 const UsersList = require('../mockData.js');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const crypto = require('crypto');
 const express = require('express');
 const router = express.Router();
 const verifyToken =  require('../middleware/auth.js');
@@ -16,10 +17,13 @@ router.post('/login', async (req, res) => {
     if (!user) {
         return res.status(400). json({message: 'User not found'});
     }
-    
-    const compatibleHash = user.password.replace(/^\$2b\$/, '$2a$');
+
+    if (!user.isVerified) {
+        return res.status(403).json({ message: 'Please verify your email address before logging in.' });
+    }
 
     const isMatch = await bcrypt.compare(password, user.password);
+
     if (!isMatch) {
         return res.status(400).json({message: 'Invalid credentials'});
     }
@@ -42,15 +46,18 @@ router.post('/signup', async (req, res) => {
         const { email, password, username, pronouns, bio, website, socials, goals } = req.body;
 
         const existingUser = await UsersList.find(user => user.email.toLowerCase() === email.toLowerCase());
+
         if (existingUser) {
             return res.status(400).json({ message: 'An account with this email already exists.'});
         }
 
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
+        const verificationToken = crypto.randomBytes(32).toString('hex');
 
         const newUser = {
             id: Date.now(),
+            isVerified: false,
             email,
             username,
             password: hashedPassword,
@@ -60,30 +67,37 @@ router.post('/signup', async (req, res) => {
             socials,
             goals,
             entries: [],
-            joined: new Date()
+            joined: new Date(),
+            verificationToken: verificationToken
         };
 
         UsersList.push(newUser);
 
-        const token = jwt.sign({ id: newUser.id }, process.env.JWT_SECRET, {expiresIn: '30d' });
+        await sendConfirmationEmail(newUser.email, newUser.username, verificationToken);
 
-        sendConfirmationEmail(newUser.email, newUser.username);
-
-        res.status(201).json({
-            token, 
-            user: {
-                id: newUser.id,
-                email: newUser.email,
-                username: newUser.username,
-                goals: newUser.goals,
-                socials: newUser.socials,
-                entries: newUser.entries
-            }
-        });
+        res.status(201).json({ message: 'Registration successful! Please check your email to verify your account before logging in.' });
 
     } catch (err) {
+        console.error(err);
         res.status(500).json({ message: 'Server error during registration.' });
     }
+});
+
+router.get('/verify/:token', (req, res) => {
+    const { token } = req.params;
+
+    const user = UsersList.find((user) => {
+        return user.verificationToken === token;
+    })
+
+    if (!user) {
+        return res.status(400).send('<h1>Invalid or expired verificaiton token.</h1>');
+    }
+
+    user.isVerified = true;
+    user.verificationToken = undefined;
+
+    res.send('<h1>Email Verified successfully!</h1><p>You can now close this tab and log into Write On App.</p>')
 });
 
 router.get('/', verifyToken, (req, res) => {
