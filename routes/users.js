@@ -5,7 +5,7 @@ const crypto = require('crypto');
 const express = require('express');
 const router = express.Router();
 const verifyToken =  require('../middleware/auth.js');
-const { sendConfirmationEmail } = require('../utils/mailer.js');
+const { sendConfirmationEmail, sendPasswordResetEmail } = require('../utils/mailer.js');
 
 router.post('/login', async (req, res) => {
     const { email, password } = req.body;
@@ -108,12 +108,44 @@ router.get('/', verifyToken, (req, res) => {
     res.json(UsersList);
 });
 
-router.get('/new', (req, res) => {
-    res.send("NEW USER FORM");
-}); 
+router.post('/forgot-password', async (req, res) => {
+    const { email } = req.body;
 
-router.post('/', (req, res) => {
-    res.send('Create User');
+    const user = UsersList.find((user) => {
+        return user.email.toLowerCase().trim() === email.toLowerCase().trim();
+    });
+
+    if (!user) {
+        return res.json({ message: 'If that email exists in our system, a reset link has been sent.' });
+    }
+
+    const resetToken = crypto.randomBytes(32).toString('hex');
+    user.resetPasswordToken = resetToken;
+    user.resetPasswordExpires = Date.now() + 3600000;
+
+    await sendPasswordResetEmail(user.email, resetToken);
+
+    res.json({ message: 'If that email exists in our system, a reset link has been sent.' });
+});
+
+router.post('/reset-password', async (req, res) => {
+    const { token, newPassword } = req.body;
+
+    const user = UsersList.find((user) => {
+        return user.resetPasswordToken === token && user.resetPasswordExpires > Date.now();
+    });
+
+    if (!user) {
+        return res.status(400).json({ message: 'Password reset token is invalid or has expired.' });
+    }
+
+    const salt = await bcrypt.genSalt(10);
+    user.password = await bcrypt.hash(newPassword, salt);
+
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpires = undefined;
+
+    res.json({ message: 'Your password has been successfully updated! You can now log in.' });
 });
 
 router.route('/:id')
