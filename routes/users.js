@@ -68,6 +68,7 @@ router.post('/signup', async (req, res) => {
             goals,
             entries: [],
             joined: new Date(),
+            groups: [],
             verificationToken: verificationToken
         };
 

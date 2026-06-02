@@ -9,7 +9,7 @@ const UsersList = [
         pronouns: 'She/Her',
         bio: 'bookworm | game enthusiast | perpetually curious',
         joined: "2026-01-01",
-        groups: [],
+        groups: ['905'],
         userIcon: {id: 'coffee', color: '#9dd6ff'},
         website: {
             name: 'jessoportfolio',
@@ -584,6 +584,61 @@ const UsersList = [
             type: 'book(s)'
         }],
         entries: [],
+    },
+    {
+        "id": 1780419467026,
+        "isVerified": true,
+        "email": "jorgan612+test20@gmail.com",
+        "username": "test20",
+        "pronouns": "",
+        "bio": "",
+        "website": {
+            "name": "",
+            "url": ""
+        },
+        "socials": [
+            {
+                "id": 1780419435361,
+                "handle": "",
+                "url": ""
+            }
+        ],
+        "goals": [
+            {
+                "name": "Weekly Word Count",
+                "id": "1",
+                "total": 0,
+                "current": 0,
+                "type": "word(s)"
+            },
+            {
+                "name": "Weekly Session Frequency ",
+                "id": "2",
+                "total": 0,
+                "current": 0,
+                "type": "day(s)"
+            },
+            {
+                "name": "Overall Word Count",
+                "id": "3",
+                "total": 0,
+                "current": 0,
+                "type": "word(s)"
+            }
+        ],
+        "entries": [
+            {
+                "id": 1780419499531,
+                "total": 0,
+                "date": "2026-06-02",
+                "year": 2026,
+                "month": 5,
+                "day": 2,
+                "time": "10:58:19 GMT-0600 (Mountain Daylight Time)"
+            }
+        ],
+        "joined": "2026-06-02T16:57:47.026Z",
+        "groups": ['905']
     }
 ];
 
