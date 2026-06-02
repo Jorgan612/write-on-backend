@@ -9,6 +9,7 @@ const UsersList = [
         pronouns: 'She/Her',
         bio: 'bookworm | game enthusiast | perpetually curious',
         joined: "2026-01-01",
+        groups: [],
         userIcon: {id: 'coffee', color: '#9dd6ff'},
         website: {
             name: 'jessoportfolio',
@@ -59,6 +60,7 @@ const UsersList = [
         pronouns: 'He/Him',
         bio: 'I LIKE SPAAAAAAAACE!',
         joined: "2026-01-01",
+        groups: [],
         userIcon: {id: 'moon', color: '#74c3b0'},
         website: {
             name: 'MaxExploresLife',
@@ -107,6 +109,7 @@ const UsersList = [
         pronouns: 'She/Her',
         bio: 'Hacker by night, closet dweller by day.',
         joined: "2026-01-01",
+        groups: [],
         userIcon: {id: 'wine', color: '#fe8faf'},
         website: {
             name: 'pestnet.net',
@@ -155,6 +158,7 @@ const UsersList = [
         pronouns: 'He/Him',
         bio: 'Oh aye, Sassenach.',
         joined: "2026-01-01",
+        groups: [],
         userIcon: {id: 'horseHead', color: '#f18581'},
         website: {
             name: 'HighlanderMan',
@@ -203,6 +207,7 @@ const UsersList = [
         pronouns: 'He/Him',
         bio: 'I made a mistake',
         joined: "2026-01-01",
+        groups: [],
         userIcon: {id: 'skull', color: '#94a3b8'},
         website: {
             name: 'frankensteinsCreation',
@@ -247,6 +252,7 @@ const UsersList = [
         pronouns: 'He/Him',
         bio: 'They do move in herds',
         joined: "2026-01-01",
+        groups: [],
         userIcon: {id: 'bone', color: '#ffd07e'},
         website: {
             name: 'I dig it',
@@ -295,6 +301,7 @@ const UsersList = [
         pronouns: 'He/Him',
         bio: 'The game is afoot! (Please do not move my violin)',
         joined: "2026-01-01",
+        groups: [],
         userIcon: {id: 'meteor', color: '#2c3e50'},
         website: {
             name: 'The Science of Deduction',
@@ -343,6 +350,7 @@ const UsersList = [
         pronouns: 'He/Him',
         bio: 'I am looking for someone to share in an adventure.',
         joined: "2026-01-01",
+        groups: [],
         userIcon: {id: 'ring', color: '#ffd700'},
         website: {
             name: 'There and Back Again',
@@ -391,6 +399,7 @@ const UsersList = [
         pronouns: 'He/Him',
         bio: 'I never could get the hang of Thursdays.',
         joined: "2026-01-01",
+        groups: [],
         userIcon: {id: 'gem', color: '#87ceeb'},
         website: {
             name: 'The Hitchhikers Guide',
@@ -439,6 +448,7 @@ const UsersList = [
         pronouns: 'She/Her',
         bio: 'How long is forever? Sometimes, just one second.',
         joined: "2026-01-01",
+        groups: [],
         userIcon: {id: 'crow', color: '#ff4d4d'},
         website: {
             name: 'The Looking Glass',
@@ -487,6 +497,7 @@ const UsersList = [
         pronouns: 'He/Him',
         bio: 'Follow the butterflies? Why couldn’t it be follow the moths?',
         joined: "2026-01-01",
+        groups: [],
         userIcon: {id: 'knight', color: '#740001'},
         website: {
             name: 'Chudley Cannons Fan Page',
@@ -535,6 +546,7 @@ const UsersList = [
         pronouns: 'She/Her',
         bio: 'Obstinate, headstrong girl! (Actually, I just like walking in the mud)',
         joined: "2026-01-01",
+        groups: [],
         userIcon: {id: 'mountain', color: '#f5f5dc'},
         website: {
             name: 'Prejudice and Other Opinions',
