@@ -4,7 +4,7 @@ const router = express.Router();
 
 let groups = [];
 
-router.post('', (req, require, res) => {
+router.post('/', (req, require, res) => {
     const { name, dates, invites } = req.body;
 
     if (!name || name.trim() === '') {
@@ -21,4 +21,15 @@ router.post('', (req, require, res) => {
     groups.push(newGroup);
 
     res.status(201).json(newGroup);
-})
+});
+
+router.post('/:id/meetings', (req, res) => {
+    const { id } = req.params;
+    const { dateTime } = req.body;
+
+
+
+    res.status(200).json({ message: 'Meeting(s) scheduled successfully.' });
+});
+
+module.exports = router;
