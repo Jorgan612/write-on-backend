@@ -1,26 +1,26 @@
+const Groups = require('../mockData.js');
 const express = require('express');
 const router = express.Router();
 
-
-let groups = [];
-
 router.post('/', (req, res) => {
-    const { name, meetings, members, ownerID, groupId, creationDate } = req.body;
+    const { name, meetings, invites, members, ownerID, groupId, creationDate } = req.body;
+    console.log('req.body', req.body)
 
     if (!name || name.trim() === '') {
         return res.status(400).json({ error: 'A group name is required.' });
     }
 
     const newGroup = {
-        name: name.trim(),
-        meetings: meetings || [],
-        members: members || [],
-        ownerID: ownerID,
         groupId: Date.now().toString(),
+        name: name.trim(),
+        ownerID: ownerID,
         creationDate: creationDate,
+        meetings: meetings || [],
+        invites: invites,
+        members: members || [],
     };
 
-    groups.push(newGroup);
+    Groups.push(newGroup);
 
     res.status(201).json({ message: 'Group created successfully!' });
 });
@@ -28,8 +28,6 @@ router.post('/', (req, res) => {
 router.post('/:id/meetings', (req, res) => {
     const { id } = req.params;
     const { dateTime } = req.body;
-
-
 
     res.status(200).json({ message: 'Meeting(s) scheduled successfully.' });
 });
