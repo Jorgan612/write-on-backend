@@ -1,10 +1,9 @@
-const Groups = require('../mockData.js');
+const { UsersList, Groups } = require('../mockData.js');
 const express = require('express');
 const router = express.Router();
 
 router.post('/', (req, res) => {
     const { name, meetings, invites, members, ownerID, groupId, creationDate } = req.body;
-    console.log('req.body', req.body)
 
     if (!name || name.trim() === '') {
         return res.status(400).json({ error: 'A group name is required.' });
@@ -21,6 +20,20 @@ router.post('/', (req, res) => {
     };
 
     Groups.push(newGroup);
+
+    const currentUser = UsersList.find((user) => {
+        return user.id === ownerID;
+    });
+
+    if (currentUser)  {
+        if (!currentUser.groups) {
+            currentUser.groups = [];
+        }
+
+        currentUser.groups.push(newGroup.groupId);
+    } else {
+        console.warn(`Warning: Owner ID ${ownerID} not found in mock database.`);
+    }
 
     res.status(201).json({ message: 'Group created successfully!' });
 });

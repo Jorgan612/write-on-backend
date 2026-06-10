@@ -662,4 +662,4 @@ const UsersList = [
     }
 ];
 
-module.exports = UsersList;
+module.exports = { UsersList, Groups };
