@@ -4,23 +4,25 @@ const router = express.Router();
 
 let groups = [];
 
-router.post('/', (req, require, res) => {
-    const { name, dates, invites } = req.body;
+router.post('/', (req, res) => {
+    const { name, meetings, members, ownerID, groupId, creationDate } = req.body;
 
     if (!name || name.trim() === '') {
-        return res.status(400).json({ error: 'Group name is required.' });
+        return res.status(400).json({ error: 'A group name is required.' });
     }
 
     const newGroup = {
-        id: Date.now().toString(),
         name: name.trim(),
-        dates: dates || [],
-        invites: invites || []
+        meetings: meetings || [],
+        members: members || [],
+        ownerID: ownerID,
+        groupId: Date.now().toString(),
+        creationDate: creationDate,
     };
 
     groups.push(newGroup);
 
-    res.status(201).json(newGroup);
+    res.status(201).json({ message: 'Group created successfully!' });
 });
 
 router.post('/:id/meetings', (req, res) => {
