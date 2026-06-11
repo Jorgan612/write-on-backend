@@ -14,9 +14,72 @@ const Groups = [
             '2026-08-26'
         ],
         invites: [ 'jorgan612@gmail.com', 'mhenry091@gmail.com' ],
-        members: []
+        members: [612, 311]
     }
 ];
+
+const Excerpts = [
+    {
+        id: 1234,
+        groupId: '1781126449479',
+        meetingDate: '2026-06-17',
+        userID: 612,
+        links: [
+            {
+                id: '123',
+                linkName: 'Chapter 1',
+                linkURL: 'https://docs.google.com'
+            },
+            {
+                id: '321',
+                linkName: 'Chapter 2',
+                linkURL: 'https://docs.google.com'
+            },
+        ],
+        description: 'Any and all feedback is appreciated for chapter 1 and 2. Thank you!',
+        createdAt: '1781204400000'
+    },
+    {
+        id: 98875,
+        groupId: '1781126449479',
+        meetingDate: '2026-07-08',
+        userID: 612,
+        links: [
+            {
+                id: '123',
+                linkName: 'Chapter 3',
+                linkURL: 'https://docs.google.com'
+            },
+            {
+                id: '321',
+                linkName: 'Chapter 4',
+                linkURL: 'https://docs.google.com'
+            },
+        ],
+        description: 'I am looking for some feedback on chapter 3 adn 4. I am struggling to sort out the dialogue in these chapters so that it reads less awkwardly.',
+        createdAt: '1781204400000'
+    },
+    {
+        id: 98512,
+        groupId: '1781126449479',
+        meetingDate: '2026-07-08',
+        userID: 311,
+        links: [
+            {
+                id: '654',
+                linkName: 'Chapter 10',
+                linkURL: 'https://docs.google.com'
+            },
+            {
+                id: '852',
+                linkName: 'Chapter 11',
+                linkURL: 'https://docs.google.com'
+            },
+        ],
+        description: 'Looking for feedback on scene structure for chapter 10 and 11. Any advice is appreciated, thanks.',
+        createdAt: '1781204400000'
+    }
+]
 
 const UsersList = [
     {
