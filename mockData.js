@@ -725,4 +725,4 @@ const UsersList = [
     }
 ];
 
-module.exports = { UsersList, Groups };
+module.exports = { UsersList, Groups, Excerpts };

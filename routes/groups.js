@@ -1,4 +1,4 @@
-const { UsersList, Groups } = require('../mockData.js');
+const { UsersList, Groups, Excerpts } = require('../mockData.js');
 const express = require('express');
 const router = express.Router();
 
