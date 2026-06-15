@@ -92,7 +92,7 @@ const UsersList = [
         pronouns: 'She/Her',
         bio: 'bookworm | game enthusiast | perpetually curious',
         joined: "2026-01-01",
-        groups: ['905', '1781126449479'],
+        groups: ['1781126449479'],
         userIcon: {id: 'coffee', color: '#9dd6ff'},
         website: {
             name: 'jessoportfolio',

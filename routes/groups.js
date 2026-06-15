@@ -2,6 +2,20 @@ const { UsersList, Groups, Excerpts } = require('../mockData.js');
 const express = require('express');
 const router = express.Router();
 
+router.get('/group/:id', (req, res) => {
+    const { id } = req.params;
+
+    const group = Groups.find((group) => {
+        return group.groupId === id;
+    })
+
+    if (!group) {
+        return res.status(404).json({ message: 'Ground not found.' });
+    }
+
+    return res.status(200).json(group);
+});
+
 router.post('/', (req, res) => {
     const { name, meetings, invites, members, ownerID, groupId, creationDate } = req.body;
 
