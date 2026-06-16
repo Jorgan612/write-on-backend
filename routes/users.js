@@ -101,12 +101,19 @@ router.get('/verify/:token', (req, res) => {
     res.send('<h1>Email Verified successfully!</h1><p>You can now close this tab and log into Write On App.</p>')
 });
 
-router.get('/', verifyToken, (req, res) => {
+router.get('/:groupId', (req, res) => {
+    const { groupId } = req.params;
+
     if (!UsersList) {
-        return res.status(404).json({error: "No users found."});
+        return res.status(404).json({error: "No members found."});
     }
 
-    res.json(UsersList);
+    const groupMembers = UsersList.filter((user) => {
+        return user.groups.includes(groupId);
+
+    });
+
+    res.json(groupMembers);
 });
 
 router.post('/forgot-password', async (req, res) => {

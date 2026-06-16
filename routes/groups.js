@@ -10,7 +10,7 @@ router.get('/group/:id', (req, res) => {
     })
 
     if (!group) {
-        return res.status(404).json({ message: 'Ground not found.' });
+        return res.status(404).json({ message: 'Group not found.' });
     }
 
     return res.status(200).json(group);
