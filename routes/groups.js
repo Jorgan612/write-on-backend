@@ -52,6 +52,22 @@ router.post('/', (req, res) => {
     res.status(201).json({ message: 'Group created successfully!' });
 });
 
+router.get('/group/:groupId/excerpts', (req, res) => {
+
+    const { groupId } = req.params;
+
+    if (!Excerpts) {
+        return res.status(404).json({error:"No excerpts found."});
+    }
+
+    const excerpts = Excerpts.filter((excerpt) => {
+        return excerpt.groupId === groupId;
+    });
+
+    return res.json(excerpts);
+
+});
+
 router.post('/:id/meetings', (req, res) => {
     const { id } = req.params;
     const { dateTime } = req.body;
