@@ -24,6 +24,7 @@ const Excerpts = [
         groupId: '1781126449479',
         meetingDate: '2026-06-17',
         userID: 612,
+        username: 'Jesso',
         userIcon: {id: 'coffee', color: '#9dd6ff'},
         links: [
             {
@@ -45,6 +46,7 @@ const Excerpts = [
         groupId: '1781126449479',
         meetingDate: '2026-07-08',
         userID: 612,
+        username: 'Jesso',
         userIcon: {id: 'coffee', color: '#9dd6ff'},
         links: [
             {
@@ -66,6 +68,7 @@ const Excerpts = [
         groupId: '1781126449479',
         meetingDate: '2026-07-08',
         userID: 311,
+        username: 'MaxExplores',
         userIcon: {id: 'moon', color: '#74c3b0'},
         links: [
             {
