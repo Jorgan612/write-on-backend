@@ -22,7 +22,7 @@ const Excerpts = [
     {
         id: 1234,
         groupId: '1781126449479',
-        meetingDate: '2026-06-17',
+        meetingDate: '2026-06-24',
         userID: 612,
         username: 'Jesso',
         userIcon: {id: 'coffee', color: '#9dd6ff'},
