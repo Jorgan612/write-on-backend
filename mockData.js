@@ -84,6 +84,28 @@ const Excerpts = [
         ],
         description: 'Looking for feedback on scene structure for chapter 10 and 11. Any advice is appreciated, thanks.',
         createdAt: '1781204400000'
+    },
+    {
+        id: 98512,
+        groupId: '1781126449479',
+        meetingDate: '2026-07-22',
+        userID: 311,
+        username: 'MaxExplores',
+        userIcon: {id: 'moon', color: '#74c3b0'},
+        links: [
+            {
+                id: '654',
+                linkName: 'Chapter 10',
+                linkURL: 'https://docs.google.com'
+            },
+            {
+                id: '852',
+                linkName: 'Chapter 11',
+                linkURL: 'https://docs.google.com'
+            },
+        ],
+        description: 'Looking for feedback on scene structure for chapter 10 and 11. Any advice is appreciated, thanks.',
+        createdAt: '1781204400000'
     }
 ]
 
