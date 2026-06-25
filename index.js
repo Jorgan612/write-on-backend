@@ -16,8 +16,10 @@ app.get('/', (req, res) => {
 });
 
 const userRouter = require('./routes/users');
+const groupRouter = require('./routes/groups');
 
 app.use('/users', userRouter);
+app.use('/groups', groupRouter);
 
 app.listen(PORT, ()=> {
     console.log(`Server is running on http://localhost:${PORT}`);

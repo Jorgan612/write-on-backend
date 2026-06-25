@@ -1,3 +1,114 @@
+
+const Groups = [
+    {
+        groupId: '1781126449479',
+        name: "Jesso's Group",
+        ownerID: 1780419467026,
+        creationDate: '2026-06-10T21:20:49.479Z',
+        meetings: [
+            '2026-06-17',
+            '2026-06-24', '2026-07-08',
+            '2026-07-15', '2026-07-22',
+            '2026-07-29', '2026-08-05',
+            '2026-08-12', '2026-08-19',
+            '2026-08-26', '2026-06-10'
+        ],
+        invites: [ 'jorgan612@gmail.com', 'mhenry091@gmail.com' ],
+        members: [612, 311]
+    }
+];
+
+const Excerpts = [
+    {
+        id: 1234,
+        groupId: '1781126449479',
+        meetingDate: '2026-06-24',
+        userID: 612,
+        username: 'Jesso',
+        userIcon: {id: 'coffee', color: '#9dd6ff'},
+        links: [
+            {
+                id: '123',
+                linkName: 'Chapter 1',
+                linkURL: 'https://docs.google.com'
+            },
+            {
+                id: '321',
+                linkName: 'Chapter 2',
+                linkURL: 'https://docs.google.com'
+            },
+        ],
+        description: 'Any and all feedback is appreciated for chapter 1 and 2. Thank you!',
+        createdAt: '1781204400000'
+    },
+    {
+        id: 98875,
+        groupId: '1781126449479',
+        meetingDate: '2026-07-08',
+        userID: 612,
+        username: 'Jesso',
+        userIcon: {id: 'coffee', color: '#9dd6ff'},
+        links: [
+            {
+                id: '123',
+                linkName: 'Chapter 3',
+                linkURL: 'https://docs.google.com'
+            },
+            {
+                id: '321',
+                linkName: 'Chapter 4',
+                linkURL: 'https://docs.google.com'
+            },
+        ],
+        description: 'I am looking for some feedback on chapter 3 adn 4. I am struggling to sort out the dialogue in these chapters so that it reads less awkwardly.',
+        createdAt: '1781204400000'
+    },
+    {
+        id: 98512,
+        groupId: '1781126449479',
+        meetingDate: '2026-07-08',
+        userID: 311,
+        username: 'MaxExplores',
+        userIcon: {id: 'moon', color: '#74c3b0'},
+        links: [
+            {
+                id: '654',
+                linkName: 'Chapter 10',
+                linkURL: 'https://docs.google.com'
+            },
+            {
+                id: '852',
+                linkName: 'Chapter 11',
+                linkURL: 'https://docs.google.com'
+            },
+        ],
+        description: 'Looking for feedback on scene structure for chapter 10 and 11. Any advice is appreciated, thanks.',
+        createdAt: '1781204400000'
+    },
+    {
+        id: 98513,
+        groupId: '1781126449479',
+        meetingDate: '2026-07-22',
+        userID: 311,
+        username: 'MaxExplores',
+        userIcon: {id: 'moon', color: '#74c3b0'},
+        links: [
+            {
+                id: '654',
+                linkName: 'Chapter 12',
+                linkURL: 'https://docs.google.com'
+            },
+            {
+                id: '852',
+                linkName: 'Chapter 13',
+                linkURL: 'https://docs.google.com'
+            },
+        ],
+        description: 'Looking for feedback on scene structure for chapter 12 and 13. Any advice is appreciated, thanks.',
+        createdAt: '1781204400000'
+    }
+]
+
 const UsersList = [
     {
         id: 612,
@@ -9,6 +120,7 @@ const UsersList = [
         pronouns: 'She/Her',
         bio: 'bookworm | game enthusiast | perpetually curious',
         joined: "2026-01-01",
+        groups: ['1781126449479'],
         userIcon: {id: 'coffee', color: '#9dd6ff'},
         website: {
             name: 'jessoportfolio',
@@ -59,6 +171,7 @@ const UsersList = [
         pronouns: 'He/Him',
         bio: 'I LIKE SPAAAAAAAACE!',
         joined: "2026-01-01",
+        groups: ['1781126449479'],
         userIcon: {id: 'moon', color: '#74c3b0'},
         website: {
             name: 'MaxExploresLife',
@@ -107,6 +220,7 @@ const UsersList = [
         pronouns: 'She/Her',
         bio: 'Hacker by night, closet dweller by day.',
         joined: "2026-01-01",
+        groups: ['1781126449479'],
         userIcon: {id: 'wine', color: '#fe8faf'},
         website: {
             name: 'pestnet.net',
@@ -155,6 +269,7 @@ const UsersList = [
         pronouns: 'He/Him',
         bio: 'Oh aye, Sassenach.',
         joined: "2026-01-01",
+        groups: ['1781126449479'],
         userIcon: {id: 'horseHead', color: '#f18581'},
         website: {
             name: 'HighlanderMan',
@@ -203,6 +318,7 @@ const UsersList = [
         pronouns: 'He/Him',
         bio: 'I made a mistake',
         joined: "2026-01-01",
+        groups: ['1781126449479'],
         userIcon: {id: 'skull', color: '#94a3b8'},
         website: {
             name: 'frankensteinsCreation',
@@ -247,6 +363,7 @@ const UsersList = [
         pronouns: 'He/Him',
         bio: 'They do move in herds',
         joined: "2026-01-01",
+        groups: ['1781126449479'],
         userIcon: {id: 'bone', color: '#ffd07e'},
         website: {
             name: 'I dig it',
@@ -295,6 +412,7 @@ const UsersList = [
         pronouns: 'He/Him',
         bio: 'The game is afoot! (Please do not move my violin)',
         joined: "2026-01-01",
+        groups: ['1781126449479'],
         userIcon: {id: 'meteor', color: '#2c3e50'},
         website: {
             name: 'The Science of Deduction',
@@ -343,6 +461,7 @@ const UsersList = [
         pronouns: 'He/Him',
         bio: 'I am looking for someone to share in an adventure.',
         joined: "2026-01-01",
+        groups: ['1781126449479'],
         userIcon: {id: 'ring', color: '#ffd700'},
         website: {
             name: 'There and Back Again',
@@ -391,6 +510,7 @@ const UsersList = [
         pronouns: 'He/Him',
         bio: 'I never could get the hang of Thursdays.',
         joined: "2026-01-01",
+        groups: ['1781126449479'],
         userIcon: {id: 'gem', color: '#87ceeb'},
         website: {
             name: 'The Hitchhikers Guide',
@@ -439,6 +559,7 @@ const UsersList = [
         pronouns: 'She/Her',
         bio: 'How long is forever? Sometimes, just one second.',
         joined: "2026-01-01",
+        groups: ['1781126449479'],
         userIcon: {id: 'crow', color: '#ff4d4d'},
         website: {
             name: 'The Looking Glass',
@@ -487,6 +608,7 @@ const UsersList = [
         pronouns: 'He/Him',
         bio: 'Follow the butterflies? Why couldn’t it be follow the moths?',
         joined: "2026-01-01",
+        groups: ['1781126449479'],
         userIcon: {id: 'knight', color: '#740001'},
         website: {
             name: 'Chudley Cannons Fan Page',
@@ -535,6 +657,7 @@ const UsersList = [
         pronouns: 'She/Her',
         bio: 'Obstinate, headstrong girl! (Actually, I just like walking in the mud)',
         joined: "2026-01-01",
+        groups: ['1781126449479'],
         userIcon: {id: 'mountain', color: '#f5f5dc'},
         website: {
             name: 'Prejudice and Other Opinions',
@@ -572,7 +695,62 @@ const UsersList = [
             type: 'book(s)'
         }],
         entries: [],
+    },
+    {
+        "id": 1780419467026,
+        "isVerified": true,
+        "email": "jorgan612+test20@gmail.com",
+        "username": "test20",
+        "pronouns": "",
+        "bio": "",
+        "website": {
+            "name": "",
+            "url": ""
+        },
+        "socials": [
+            {
+                "id": 1780419435361,
+                "handle": "",
+                "url": ""
+            }
+        ],
+        "goals": [
+            {
+                "name": "Weekly Word Count",
+                "id": "1",
+                "total": 0,
+                "current": 0,
+                "type": "word(s)"
+            },
+            {
+                "name": "Weekly Session Frequency ",
+                "id": "2",
+                "total": 0,
+                "current": 0,
+                "type": "day(s)"
+            },
+            {
+                "name": "Overall Word Count",
+                "id": "3",
+                "total": 0,
+                "current": 0,
+                "type": "word(s)"
+            }
+        ],
+        "entries": [
+            {
+                "id": 1780419499531,
+                "total": 0,
+                "date": "2026-06-02",
+                "year": 2026,
+                "month": 5,
+                "day": 2,
+                "time": "10:58:19 GMT-0600 (Mountain Daylight Time)"
+            }
+        ],
+        "joined": "2026-06-02T16:57:47.026Z",
+        "groups": ['1781126449479', '905']
     }
 ];
 
-module.exports = UsersList;
+module.exports = { UsersList, Groups, Excerpts };
