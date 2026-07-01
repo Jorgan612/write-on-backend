@@ -68,6 +68,15 @@ router.get('/group/:groupId/excerpts', (req, res) => {
 
 });
 
+router.post('/group/excerpts', (req, res) => {
+    const newExcerpt = req.body;
+
+    Excerpts.push(newExcerpt);
+
+    res.status(201).json(newExcerpt);
+    console.log('Excerpts', Excerpts)
+});
+
 router.post('/:id/meetings', (req, res) => {
     const { id } = req.params;
     const { dateTime } = req.body;
