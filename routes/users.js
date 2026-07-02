@@ -1,4 +1,4 @@
-const { UsersList } = require('../mockData.js');
+const { UsersList, Groups } = require('../mockData.js');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
@@ -107,7 +107,7 @@ router.get('/:groupId', verifyToken, (req, res) => {
     const authenticatedUserID = req.user.id;
 
     const group = Groups.find((group) => {
-        group.groupId === groupId;
+        return group.groupId === groupId;
     })
 
     if (!group) {

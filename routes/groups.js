@@ -2,7 +2,6 @@ const verifyToken = require('../middleware/auth.js');
 const { UsersList, Groups, Excerpts } = require('../mockData.js');
 const express = require('express');
 const router = express.Router();
-const verifyToken = require('../middleware/auth.js');
 
 router.get('/group/:id', verifyToken, (req, res) => {
     const { id } = req.params;
@@ -74,7 +73,7 @@ router.get('/group/:groupId/excerpts', verifyToken, (req, res) => {
         return res.status(404).json({ message: "Group not found."});
     }
 
-    const isMember = group.members.includes(Number(authenticatedUserId)) || Number(group.ownerID) === Number(authenticatedUserId);
+    const isMember = group.members.includes(Number(authenticatedUserID)) || Number(group.ownerID) === Number(authenticatedUserID);
 
     if (!isMember) {
         return res.status(403).json({ message: "Unauthorized: You do not belong to this group." });
