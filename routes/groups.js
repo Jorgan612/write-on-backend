@@ -69,11 +69,38 @@ router.get('/group/:groupId/excerpts', (req, res) => {
 
 });
 
-router.post('/group/excerpts', (req, res) => {
-    const newExcerpt = req.body;
+router.post('/group/excerpts', verifyToken, (req, res) => {
+    const authenticatedUserID = req.user.id;
+    const { groupId, meetingDate, username, userIcon, links, description } = req.body;
+
+    const group = Groups.find((group) => {
+        return group.groupId === groupId;
+    })
+
+    if (!group) {
+        return res.status(404).json({ message: "Group not found." });
+    }
+
+    const isMember = group.members.includes(Number(authenticatedUserID)) || Number(group.ownerID) === Number(authenticatedUserID);
+
+    if (!isMember) {
+        return res.status(403).json({ message: "Unauthorized: You cannot add new excerpts to a group you are not a member of."});
+    }
+
+
+    const newExcerpt = {
+        id: Date.now(),
+        groupId,
+        meetingDate,
+        userId: Number(authenticatedUserID),
+        username,
+        userIcon,
+        links: Array.isArray(links) ? links.slice(0,5) : [],
+        description: typeof description === 'string' ? description : '',
+        createdAt: Date.now().toString()
+    };
 
     Excerpts.push(newExcerpt);
-
     res.status(201).json(newExcerpt);
 });
 
@@ -95,30 +122,41 @@ router.put('/excerpts/:id', verifyToken, async (req, res) => {
 
     const {links, description} = req.body;
 
-    if (description !== undefined) {
-        if (typeof description !== 'string') {
-            return res.status(400).json({ message: "Invalid date type for description."});
-        }
+    if (description !== undefined && typeof description === 'string') {
         currentExcerpt.description = description;
     }
 
-    if (links !== undefined) {
-        if (!Array.isArray(links)) {
-            return res.status(400).json({ message: "Links must be an array."});
-        }
-
+    if (links !== undefined && Array.isArray(links)) {
         currentExcerpt.links = links.slice(0, 5);
     }
     
     Excerpts[index] = currentExcerpt;
-        res.json(currentExcerpt);
+    res.json(currentExcerpt);
 });
 
-router.post('/:id/meetings', (req, res) => {
+router.post('/:id/meetings', verifyToken, (req, res) => {
     const { id } = req.params;
+    const authenticatedUserID = req.user.id;
+
+    const group = Groups.find((group) => {
+        return group.groupId === id;
+    })
+
+    if (!group) {
+        return res.status(404).json({ message: "Group not found."});
+    }
+
+    if (Number(group.ownerID) !== Number(authenticatedUserID)) {
+        return res.status(403).json({ message: "Unauthorized: Only the group manager can schedule meetings."});
+    }
+
     const { dateTime } = req.body;
 
-    res.status(200).json({ message: 'Meeting(s) scheduled successfully.' });
+    if (dateTime) {
+        group.meetings.push(dateTime);
+    }
+
+    res.status(200).json({ message: 'Meeting(s) scheduled successfully.', meetings: group.meetings });
 });
 
 module.exports = router;

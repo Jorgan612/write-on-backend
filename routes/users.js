@@ -101,11 +101,22 @@ router.get('/verify/:token', (req, res) => {
     res.send('<h1>Email Verified successfully!</h1><p>You can now close this tab and log into Write On App.</p>')
 });
 
-router.get('/:groupId', (req, res) => {
+router.get('/:groupId', verifyToken, (req, res) => {
     const { groupId } = req.params;
+    const authenticatedUserID = req.user.id;
 
-    if (!UsersList) {
-        return res.status(404).json({error: "No members found."});
+    const group = Groups.find((group) => {
+        group.groupId === groupId;
+    })
+
+    if (!group) {
+        return res.status(404).json({ message: "Group not found."});
+    }
+
+    const isMember = group.members.includes(Number(authenticatedUserID)) || Number(group.ownerId) === Number(authenticatedUserID);
+
+    if (!isMember) {
+        return res.status(403).json({ message: "Unauthorized."});
     }
 
     const groupMembers = UsersList.filter((user) => {
@@ -113,7 +124,11 @@ router.get('/:groupId', (req, res) => {
 
     });
 
-    res.json(groupMembers);
+    const secureMembers = groupMembers.map(({password, verificationToken, resetPasswordToken, ...secureMember}) => {
+        return secureMember;
+    });
+
+    res.json(secureMembers);
 });
 
 router.post('/forgot-password', async (req, res) => {
@@ -157,14 +172,30 @@ router.post('/reset-password', async (req, res) => {
 });
 
 router.route('/:id')
-.get((req, res) => {
-    res.send(`Get User with ID ${req.params.id}`);
+.get(verifyToken, (req, res) => {
+    const user = UsersList.find((user)=> {
+        return user.id === Number(req.params.id);
+    })
+
+    if (!user) {
+        return res.status(404).json({ message: "User not found."});
+    }
+
+    const { password, ...secureUser } = user;
+    res.json(secureUser);
 })
-.put((req, res) => {
-    res.send(`Post new user with ID ${req.params.id}`);
+.put(verifyToken, (req, res) => {
+    if (Number(req.params.id) !== Number(req.user.id)) {
+        return res.status(403).json({ message: "Unauthorized: You cannot modify this profile."});
+    }
+
+    res.send(`Updated User profile for ID ${req.user.id}`);
 })
 .delete((req, res) => {
-    res.send(`Delete User with ID ${req.params.id}`);
+    if (Number(req.params.id) !== Number(req.user.id)) {
+        return res.status(403).json({ message: "Unauthorized: You cannot delete this account."});
+    }
+    res.send(`Deleted User profile for ID ${req.params.id}`);
 });
 
  module.exports = router;
