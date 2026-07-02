@@ -7,6 +7,7 @@ const router = express.Router();
 const verifyToken =  require('../middleware/auth.js');
 const { sendConfirmationEmail, sendPasswordResetEmail } = require('../utils/mailer.js');
 
+
 router.post('/login', async (req, res) => {
     const { email, password } = req.body;
 
