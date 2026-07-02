@@ -1,6 +1,7 @@
 const { UsersList, Groups, Excerpts } = require('../mockData.js');
 const express = require('express');
 const router = express.Router();
+const verifyToken = require('../middleware/auth.js');
 
 router.get('/group/:id', (req, res) => {
     const { id } = req.params;
@@ -74,7 +75,43 @@ router.post('/group/excerpts', (req, res) => {
     Excerpts.push(newExcerpt);
 
     res.status(201).json(newExcerpt);
-    console.log('Excerpts', Excerpts)
+});
+
+router.put('/excerpts/:id', verifyToken, async (req, res) => {
+    const { id } = req.params;
+    const authenticatedUserID = req.user.id;
+
+    const index = Excerpts.findIndex(exc => exc.id === Number(id));
+
+    if (index === -1) {
+        return res.status(404).json({ message: "Excerpt not found" });
+    }
+
+    const currentExcerpt = Excerpts[index];
+
+    if (Number(currentExcerpt.userID) !== Number(authenticatedUserID)) {
+        return res.status(403).json({ message: "Unauthorized: You can only edit your own excerpts." });
+    }
+
+    const {links, description} = req.body;
+
+    if (description !== undefined) {
+        if (typeof description !== 'string') {
+            return res.status(400).json({ message: "Invalid date type for description."});
+        }
+        currentExcerpt.description = description;
+    }
+
+    if (links !== undefined) {
+        if (!Array.isArray(links)) {
+            return res.status(400).json({ message: "Links must be an array."});
+        }
+
+        currentExcerpt.links = links.slice(0, 5);
+    }
+    
+    Excerpts[index] = currentExcerpt;
+        res.json(currentExcerpt);
 });
 
 router.post('/:id/meetings', (req, res) => {
