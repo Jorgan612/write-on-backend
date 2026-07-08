@@ -18,7 +18,7 @@ const Groups = [
     }
 ];
 
-const Excerpts = [
+let Excerpts = [
     {
         id: 1234,
         groupId: '1781126449479',
