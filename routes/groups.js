@@ -3,25 +3,35 @@ const { UsersList, Groups, Excerpts } = require('../mockData.js');
 const express = require('express');
 const router = express.Router();
 
-router.get('/group/:id', verifyToken, (req, res) => {
-    const { id } = req.params;
-    const authenticatedUserID = req.user.id;
+router.get('/', verifyToken, (req, res) => {
+    const { ids } = req.query;
+    const authenticatedUserID = Number(req.user.id);
 
-    const group = Groups.find((group) => {
-        return group.groupId === id;
-    })
-
-    if (!group) {
-        return res.status(404).json({ message: 'Group not found.' });
+    if (!ids) {
+        return res.status(400).json({ message: 'No group IDs provided.' });
     }
 
-    const isMember = group.members.includes(Number(authenticatedUserID)) || Number(group.ownerID) === Number(authenticatedUserID);
+    const requestedIds = Array.isArray(ids) ? ids : [ids];
 
-    if (!isMember) {
+    const matchedGroups = Groups.filter((group) => {
+        return requestedIds.includes(group.groupId);
+    });
+
+    if (matchedGroups.length === 0) {
+        return res.status(404).json({ message: 'No matching groups found.'});
+    }
+
+    const authorizedGroups = matchedGroups.filter((group) => {
+        const isMember = group.members.includes(authenticatedUserID) || Number(group.ownerID) === authenticatedUserID;
+
+        return isMember;
+    });
+
+    if (authorizedGroups.length === 0 ) {
         return res.status(403).json({ message: "Unauthorized: You do not have access to this group."});
     }
 
-    return res.status(200).json(group);
+    return res.status(200).json(authorizedGroups);
 });
 
 router.post('/', verifyToken, (req, res) => { 

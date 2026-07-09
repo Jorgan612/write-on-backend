@@ -3,7 +3,7 @@ const Groups = [
     {
         groupId: '1781126449479',
         name: "Jesso's Group",
-        ownerID: 1780419467026,
+        ownerID: 612,
         creationDate: '2026-06-10T21:20:49.479Z',
         meetings: [
             '2026-06-17',
@@ -15,6 +15,38 @@ const Groups = [
         ],
         invites: [ 'jorgan612@gmail.com', 'mhenry091@gmail.com' ],
         members: [612, 311]
+    },
+    {
+        groupId: '97494462311871',
+        name: "Jesso's Second Group",
+        ownerID: 612,
+        creationDate: '2026-06-10T21:20:49.479Z',
+        meetings: [
+            '2026-06-17',
+            '2026-06-24', '2026-07-08',
+            '2026-07-15', '2026-07-22',
+            '2026-07-29', '2026-08-05',
+            '2026-08-12', '2026-08-19',
+            '2026-08-26', '2026-06-10'
+        ],
+        invites: [ 'jorgan612@gmail.com', 'mhenry091@gmail.com' ],
+        members: [612, 311, 1774]
+    },
+    {
+        groupId: '97494462311871',
+        name: "Max's Group",
+        ownerID: 311,
+        creationDate: '2026-06-10T21:20:49.479Z',
+        meetings: [
+            '2026-06-17',
+            '2026-06-24', '2026-07-08',
+            '2026-07-15', '2026-07-22',
+            '2026-07-29', '2026-08-05',
+            '2026-08-12', '2026-08-19',
+            '2026-08-26', '2026-06-10'
+        ],
+        invites: [ 'jorgan612@gmail.com', 'mhenry091@gmail.com' ],
+        members: [612, 311, 1774, 1865]
     }
 ];
 
