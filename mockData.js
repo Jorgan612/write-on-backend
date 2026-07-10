@@ -33,7 +33,7 @@ const Groups = [
         members: [612, 311, 1774]
     },
     {
-        groupId: '97494462311871',
+        groupId: '23118719749446',
         name: "Max's Group",
         ownerID: 311,
         creationDate: '2026-06-10T21:20:49.479Z',
@@ -47,6 +47,22 @@ const Groups = [
         ],
         invites: [ 'jorgan612@gmail.com', 'mhenry091@gmail.com' ],
         members: [612, 311, 1774, 1865]
+    },
+    {
+        groupId: '23118719741111',
+        name: "Max's Second Group",
+        ownerID: 311,
+        creationDate: '2026-06-10T21:20:49.479Z',
+        meetings: [
+            '2026-06-17',
+            '2026-06-24', '2026-07-08',
+            '2026-07-15', '2026-07-22',
+            '2026-07-29', '2026-08-05',
+            '2026-08-12', '2026-08-19',
+            '2026-08-26', '2026-06-10'
+        ],
+        invites: [ 'jorgan612@gmail.com', 'mhenry091@gmail.com' ],
+        members: [311, 1774, 1865]
     }
 ];
 
@@ -152,7 +168,7 @@ const UsersList = [
         pronouns: 'She/Her',
         bio: 'bookworm | game enthusiast | perpetually curious',
         joined: "2026-01-01",
-        groups: ['1781126449479'],
+        groups: ['1781126449479', '97494462311871', '23118719749446'],
         userIcon: {id: 'coffee', color: '#9dd6ff'},
         website: {
             name: 'jessoportfolio',
@@ -203,7 +219,7 @@ const UsersList = [
         pronouns: 'He/Him',
         bio: 'I LIKE SPAAAAAAAACE!',
         joined: "2026-01-01",
-        groups: ['1781126449479'],
+        groups: ['1781126449479', '23118719749446', '97494462311871', '23118719741111'],
         userIcon: {id: 'moon', color: '#74c3b0'},
         website: {
             name: 'MaxExploresLife',
