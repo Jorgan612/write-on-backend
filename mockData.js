@@ -70,7 +70,7 @@ const Excerpts = [
     {
         id: 1234,
         groupId: '1781126449479',
-        meetingDate: '2026-06-24',
+        meetingDate: '2026-07-29',
         userID: 612,
         username: 'Jesso',
         userIcon: {id: 'coffee', color: '#9dd6ff'},
@@ -92,7 +92,7 @@ const Excerpts = [
     {
         id: 98875,
         groupId: '1781126449479',
-        meetingDate: '2026-07-08',
+        meetingDate: '2026-07-15',
         userID: 612,
         username: 'Jesso',
         userIcon: {id: 'coffee', color: '#9dd6ff'},
@@ -114,7 +114,7 @@ const Excerpts = [
     {
         id: 98512,
         groupId: '1781126449479',
-        meetingDate: '2026-07-08',
+        meetingDate: '2026-07-15',
         userID: 311,
         username: 'MaxExplores',
         userIcon: {id: 'moon', color: '#74c3b0'},
