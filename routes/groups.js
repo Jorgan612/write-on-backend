@@ -119,7 +119,7 @@ router.post('/group/excerpts', verifyToken, (req, res) => {
         id: Date.now(),
         groupId,
         meetingDate,
-        userId: Number(authenticatedUserID),
+        userID: Number(authenticatedUserID),
         username,
         userIcon,
         links: Array.isArray(links) ? links.slice(0,5) : [],
