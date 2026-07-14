@@ -154,6 +154,50 @@ const Excerpts = [
         ],
         description: 'Looking for feedback on scene structure for chapter 12 and 13. Any advice is appreciated, thanks.',
         createdAt: '1781204400000'
+    },
+    {
+        id: 9514873,
+        groupId: '97494462311871',
+        meetingDate: '2026-07-22',
+        userID: 311,
+        username: 'MaxExplores',
+        userIcon: {id: 'moon', color: '#74c3b0'},
+        links: [
+            {
+                id: '654',
+                linkName: 'Chapter 20',
+                linkURL: 'https://docs.google.com'
+            },
+            {
+                id: '852',
+                linkName: 'Chapter 21',
+                linkURL: 'https://docs.google.com'
+            },
+        ],
+        description: 'Looking for feedback on scene structure for chapter 20 and 21. Any advice is appreciated, thanks.',
+        createdAt: '1781204400000'
+    },
+    {
+        id: 326951487,
+        groupId: '23118719749446',
+        meetingDate: '2026-07-22',
+        userID: 1774,
+        username: 'JamieFrayfray',
+        userIcon: {id: 'horseHead', color: '#f18581'},
+        links: [
+            {
+                id: '654',
+                linkName: 'Prologue',
+                linkURL: 'https://docs.google.com'
+            },
+            {
+                id: '852',
+                linkName: 'Chapter 1',
+                linkURL: 'https://docs.google.com'
+            },
+        ],
+        description: 'Thanks for reading.',
+        createdAt: '1781204400000'
     }
 ]
 
