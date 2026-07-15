@@ -161,6 +161,27 @@ router.put('/excerpts/:id', verifyToken, async (req, res) => {
     res.json(currentExcerpt);
 });
 
+router.delete('/excerpts/:id', verifyToken, (req, res) => {
+    const { id } = req.params;
+    const authenticatedUserID = req.user.id;
+
+    const index = Excerpts.findIndex(exc => exc.id === Number(id));
+
+    if (index === -1) {
+        return res.status(404).json({ message: "Excerpt not found." });
+    }
+
+    const currentExcerpt = Excerpts[index];
+
+    if (Number(currentExcerpt.userID) !== Number(authenticatedUserID)) {
+        return res.status(403).json({ message:  "Unauthorized: You can only delete your own excerpts." });
+    }
+
+    Excerpts.splice(index, 1);
+
+    res.status(200).json({ message: "Excerpt deleted successfully. "});
+});
+
 router.post('/:id/meetings', verifyToken, (req, res) => {
     const { id } = req.params;
     const authenticatedUserID = req.user.id;
