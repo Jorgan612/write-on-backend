@@ -3,7 +3,7 @@ const Groups = [
     {
         groupId: '1781126449479',
         name: "Jesso's Group",
-        ownerID: 1780419467026,
+        ownerID: 612,
         creationDate: '2026-06-10T21:20:49.479Z',
         meetings: [
             '2026-06-17',
@@ -15,6 +15,54 @@ const Groups = [
         ],
         invites: [ 'jorgan612@gmail.com', 'mhenry091@gmail.com' ],
         members: [612, 311]
+    },
+    {
+        groupId: '97494462311871',
+        name: "Jesso's Second Group",
+        ownerID: 612,
+        creationDate: '2026-06-10T21:20:49.479Z',
+        meetings: [
+            '2026-06-17',
+            '2026-06-24', '2026-07-08',
+            '2026-07-15', '2026-07-22',
+            '2026-07-29', '2026-08-05',
+            '2026-08-12', '2026-08-19',
+            '2026-08-26', '2026-06-10'
+        ],
+        invites: [ 'jorgan612@gmail.com', 'mhenry091@gmail.com' ],
+        members: [612, 311, 1774]
+    },
+    {
+        groupId: '23118719749446',
+        name: "Max's Group",
+        ownerID: 311,
+        creationDate: '2026-06-10T21:20:49.479Z',
+        meetings: [
+            '2026-06-17',
+            '2026-06-24', '2026-07-08',
+            '2026-07-15', '2026-07-22',
+            '2026-07-29', '2026-08-05',
+            '2026-08-12', '2026-08-19',
+            '2026-08-26', '2026-06-10'
+        ],
+        invites: [ 'jorgan612@gmail.com', 'mhenry091@gmail.com' ],
+        members: [612, 311, 1774, 1865]
+    },
+    {
+        groupId: '23118719741111',
+        name: "Max's Second Group",
+        ownerID: 311,
+        creationDate: '2026-06-10T21:20:49.479Z',
+        meetings: [
+            '2026-06-17',
+            '2026-06-24', '2026-07-08',
+            '2026-07-15', '2026-07-22',
+            '2026-07-29', '2026-08-05',
+            '2026-08-12', '2026-08-19',
+            '2026-08-26', '2026-06-10'
+        ],
+        invites: [ 'jorgan612@gmail.com', 'mhenry091@gmail.com' ],
+        members: [311, 1774, 1865]
     }
 ];
 
@@ -22,7 +70,7 @@ let Excerpts = [
     {
         id: 1234,
         groupId: '1781126449479',
-        meetingDate: '2026-06-24',
+        meetingDate: '2026-07-29',
         userID: 612,
         username: 'Jesso',
         userIcon: {id: 'coffee', color: '#9dd6ff'},
@@ -44,7 +92,7 @@ let Excerpts = [
     {
         id: 98875,
         groupId: '1781126449479',
-        meetingDate: '2026-07-08',
+        meetingDate: '2026-07-15',
         userID: 612,
         username: 'Jesso',
         userIcon: {id: 'coffee', color: '#9dd6ff'},
@@ -66,7 +114,7 @@ let Excerpts = [
     {
         id: 98512,
         groupId: '1781126449479',
-        meetingDate: '2026-07-08',
+        meetingDate: '2026-07-15',
         userID: 311,
         username: 'MaxExplores',
         userIcon: {id: 'moon', color: '#74c3b0'},
@@ -106,6 +154,50 @@ let Excerpts = [
         ],
         description: 'Looking for feedback on scene structure for chapter 12 and 13. Any advice is appreciated, thanks.',
         createdAt: '1781204400000'
+    },
+    {
+        id: 9514873,
+        groupId: '97494462311871',
+        meetingDate: '2026-07-22',
+        userID: 311,
+        username: 'MaxExplores',
+        userIcon: {id: 'moon', color: '#74c3b0'},
+        links: [
+            {
+                id: '654',
+                linkName: 'Chapter 20',
+                linkURL: 'https://docs.google.com'
+            },
+            {
+                id: '852',
+                linkName: 'Chapter 21',
+                linkURL: 'https://docs.google.com'
+            },
+        ],
+        description: 'Looking for feedback on scene structure for chapter 20 and 21. Any advice is appreciated, thanks.',
+        createdAt: '1781204400000'
+    },
+    {
+        id: 326951487,
+        groupId: '23118719749446',
+        meetingDate: '2026-07-22',
+        userID: 1774,
+        username: 'JamieFrayfray',
+        userIcon: {id: 'horseHead', color: '#f18581'},
+        links: [
+            {
+                id: '654',
+                linkName: 'Prologue',
+                linkURL: 'https://docs.google.com'
+            },
+            {
+                id: '852',
+                linkName: 'Chapter 1',
+                linkURL: 'https://docs.google.com'
+            },
+        ],
+        description: 'Thanks for reading.',
+        createdAt: '1781204400000'
     }
 ]
 
@@ -120,7 +212,7 @@ const UsersList = [
         pronouns: 'She/Her',
         bio: 'bookworm | game enthusiast | perpetually curious',
         joined: "2026-01-01",
-        groups: ['1781126449479'],
+        groups: ['1781126449479', '97494462311871', '23118719749446'],
         userIcon: {id: 'coffee', color: '#9dd6ff'},
         website: {
             name: 'jessoportfolio',
@@ -171,7 +263,7 @@ const UsersList = [
         pronouns: 'He/Him',
         bio: 'I LIKE SPAAAAAAAACE!',
         joined: "2026-01-01",
-        groups: ['1781126449479'],
+        groups: ['1781126449479', '23118719749446', '97494462311871', '23118719741111'],
         userIcon: {id: 'moon', color: '#74c3b0'},
         website: {
             name: 'MaxExploresLife',
@@ -220,7 +312,7 @@ const UsersList = [
         pronouns: 'She/Her',
         bio: 'Hacker by night, closet dweller by day.',
         joined: "2026-01-01",
-        groups: ['1781126449479'],
+        groups: [],
         userIcon: {id: 'wine', color: '#fe8faf'},
         website: {
             name: 'pestnet.net',
@@ -269,7 +361,7 @@ const UsersList = [
         pronouns: 'He/Him',
         bio: 'Oh aye, Sassenach.',
         joined: "2026-01-01",
-        groups: ['1781126449479'],
+        groups: ['23118719749446', '23118719741111'],
         userIcon: {id: 'horseHead', color: '#f18581'},
         website: {
             name: 'HighlanderMan',
@@ -318,7 +410,7 @@ const UsersList = [
         pronouns: 'He/Him',
         bio: 'I made a mistake',
         joined: "2026-01-01",
-        groups: ['1781126449479'],
+        groups: [],
         userIcon: {id: 'skull', color: '#94a3b8'},
         website: {
             name: 'frankensteinsCreation',
@@ -363,7 +455,7 @@ const UsersList = [
         pronouns: 'He/Him',
         bio: 'They do move in herds',
         joined: "2026-01-01",
-        groups: ['1781126449479'],
+        groups: [],
         userIcon: {id: 'bone', color: '#ffd07e'},
         website: {
             name: 'I dig it',
@@ -412,7 +504,7 @@ const UsersList = [
         pronouns: 'He/Him',
         bio: 'The game is afoot! (Please do not move my violin)',
         joined: "2026-01-01",
-        groups: ['1781126449479'],
+        groups: [],
         userIcon: {id: 'meteor', color: '#2c3e50'},
         website: {
             name: 'The Science of Deduction',
@@ -461,7 +553,7 @@ const UsersList = [
         pronouns: 'He/Him',
         bio: 'I am looking for someone to share in an adventure.',
         joined: "2026-01-01",
-        groups: ['1781126449479'],
+        groups: [],
         userIcon: {id: 'ring', color: '#ffd700'},
         website: {
             name: 'There and Back Again',
@@ -510,7 +602,7 @@ const UsersList = [
         pronouns: 'He/Him',
         bio: 'I never could get the hang of Thursdays.',
         joined: "2026-01-01",
-        groups: ['1781126449479'],
+        groups: [],
         userIcon: {id: 'gem', color: '#87ceeb'},
         website: {
             name: 'The Hitchhikers Guide',
@@ -559,7 +651,7 @@ const UsersList = [
         pronouns: 'She/Her',
         bio: 'How long is forever? Sometimes, just one second.',
         joined: "2026-01-01",
-        groups: ['1781126449479'],
+        groups: ['23118719749446', '23118719741111'],
         userIcon: {id: 'crow', color: '#ff4d4d'},
         website: {
             name: 'The Looking Glass',
@@ -608,7 +700,7 @@ const UsersList = [
         pronouns: 'He/Him',
         bio: 'Follow the butterflies? Why couldn’t it be follow the moths?',
         joined: "2026-01-01",
-        groups: ['1781126449479'],
+        groups: [],
         userIcon: {id: 'knight', color: '#740001'},
         website: {
             name: 'Chudley Cannons Fan Page',
@@ -657,7 +749,7 @@ const UsersList = [
         pronouns: 'She/Her',
         bio: 'Obstinate, headstrong girl! (Actually, I just like walking in the mud)',
         joined: "2026-01-01",
-        groups: ['1781126449479'],
+        groups: [],
         userIcon: {id: 'mountain', color: '#f5f5dc'},
         website: {
             name: 'Prejudice and Other Opinions',
@@ -749,7 +841,7 @@ const UsersList = [
             }
         ],
         "joined": "2026-06-02T16:57:47.026Z",
-        "groups": ['1781126449479', '905']
+        "groups": [, '905']
     }
 ];
 

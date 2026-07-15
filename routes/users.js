@@ -122,7 +122,6 @@ router.get('/:groupId', verifyToken, (req, res) => {
 
     const groupMembers = UsersList.filter((user) => {
         return user.groups.includes(groupId);
-
     });
 
     const secureMembers = groupMembers.map(({password, verificationToken, resetPasswordToken, ...secureMember}) => {
