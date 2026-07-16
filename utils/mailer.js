@@ -78,6 +78,51 @@ const sendPasswordResetEmail = async (toEmail, token) => {
     } catch (err) {
         console.error('Failed to dispatch password reset email:', err);
     }
-}
+};
+
+const sendGroupInviteEmail = async (toEmail, groupName, ownerName) => {
+
+    try {
+        const inviteUrl = ``
+        const signupPage = ``
+
+        const mailOptions = {
+            from:'"Write On App" <welcome@writeonapp.com>',
+            to: toEmail,
+            subject: `You've been invited to join ${groupName} on Write On!`,
+            html: `
+            <div style="font-family: sans-serif; padding: 20px; color: #333;">
+                <h2>You've been invited!</h2>
+                <p>${ownerName} invitess you to join ${groupName}. Click 'Join' below to become a member today.</p>
+                <br>
+                <p style="margin: 20px 0;">
+                    <a href="${inviteUrl}" style="background-color: #263b56; color: #94a3b8; font-weight: bold; padding: 30px 30px; text-decoration: none; border-radius: 5px;">
+                        Join
+                    </a>
+                </p>
+                <br>
+                <br>
+                <br>
+                <p>Don't have an account? Sign up below.<p>
+                <p style="margin: 20px 0;">
+                    <a href="${signupPage}" style="background-color: #263b56; color: #94a3b8; font-weight: bold; padding: 30px 30px; text-decoration: none; border-radius: 5px;">
+                        Sign up
+                    </a>
+                </p>
+                <br>
+                <br>
+                <br>
+                <p>Happy writing!</p>
+                <br>
+                <p>- The Write On Team</p>
+            </div>
+            `
+        }
+
+    } catch (err) {
+        console.error(`Failed to send invitation email to: ${toEmail} - Error:`, err);
+    }
+
+};
 
 module.exports = { sendConfirmationEmail, sendPasswordResetEmail };
