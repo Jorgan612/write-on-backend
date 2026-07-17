@@ -93,7 +93,7 @@ const sendGroupInviteEmail = async (toEmail, groupName, ownerName) => {
             html: `
             <div style="font-family: sans-serif; padding: 20px; color: #333;">
                 <h2>You've been invited!</h2>
-                <p>${ownerName} invitess you to join ${groupName}. Click 'Join' below to become a member today.</p>
+                <p>${ownerName} invites you to join ${groupName}. Click 'Join' below to become a member today.</p>
                 <br>
                 <p style="margin: 20px 0;">
                     <a href="${inviteUrl}" style="background-color: #263b56; color: #94a3b8; font-weight: bold; padding: 30px 30px; text-decoration: none; border-radius: 5px;">
@@ -125,4 +125,4 @@ const sendGroupInviteEmail = async (toEmail, groupName, ownerName) => {
 
 };
 
-module.exports = { sendConfirmationEmail, sendPasswordResetEmail };
+module.exports = { sendConfirmationEmail, sendPasswordResetEmail, sendGroupInviteEmail };
