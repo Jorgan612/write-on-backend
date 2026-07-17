@@ -1,3 +1,6 @@
+import jwt from 'jsonwebtoken';
+
+
 const nodemailer = require('nodemailer');
 
 const transporter = nodemailer.createTransport({
@@ -80,44 +83,40 @@ const sendPasswordResetEmail = async (toEmail, token) => {
     }
 };
 
-const sendGroupInviteEmail = async (toEmail, groupName, ownerName) => {
+const sendGroupInviteEmail = async (toEmail, groupName, ownerName, groupId) => {
 
     try {
-        const inviteUrl = ``
-        const signupPage = ``
+
+        const inviteToken = jwt.sign(
+            { email: toEmail, groupId: groupId },
+            process.env.JWT_SECRET,
+            { expiresIn: '7d' }
+        )
+
+        const inviteUrl = `http://localhost:3000/accept-invite?token=${inviteToken}`;
 
         const mailOptions = {
             from:'"Write On App" <welcome@writeonapp.com>',
             to: toEmail,
             subject: `You've been invited to join ${groupName} on Write On!`,
             html: `
-            <div style="font-family: sans-serif; padding: 20px; color: #333;">
+            <div style="font-family: sans-serif; padding: 20px; color: #333; max-width: 600px; margin 0 auto;">
                 <h2>You've been invited!</h2>
-                <p>${ownerName} invites you to join ${groupName}. Click 'Join' below to become a member today.</p>
-                <br>
-                <p style="margin: 20px 0;">
-                    <a href="${inviteUrl}" style="background-color: #263b56; color: #94a3b8; font-weight: bold; padding: 30px 30px; text-decoration: none; border-radius: 5px;">
-                        Join
+                <p><strong>${ownerName}</strong> invites you to join the group <strong>${groupName}</strong>. Click the button below to view your invitation and get started.</p>
+                <div style="margin: 30px 0;">
+                    <a href="${inviteUrl}" style="background-color: #263b56; color: #94a3b8; font-weight: bold; padding: 12px 24px; text-decoration: none; border-radius: 5px; display: inline-block;">
+                        View Invitation
                     </a>
-                </p>
-                <br>
-                <br>
-                <br>
-                <p>Don't have an account? Sign up below.<p>
-                <p style="margin: 20px 0;">
-                    <a href="${signupPage}" style="background-color: #263b56; color: #94a3b8; font-weight: bold; padding: 30px 30px; text-decoration: none; border-radius: 5px;">
-                        Sign up
-                    </a>
-                </p>
-                <br>
-                <br>
-                <br>
+                </div>
+                <hr style="border: none; border-top: 1px solid #eee; margin: 20px 0;" />
                 <p>Happy writing!</p>
                 <br>
                 <p>- The Write On Team</p>
             </div>
             `
         }
+
+       
 
     } catch (err) {
         console.error(`Failed to send invitation email to: ${toEmail} - Error:`, err);

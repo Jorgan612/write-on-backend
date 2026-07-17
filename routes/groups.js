@@ -54,6 +54,8 @@ router.post('/', verifyToken, (req, res) => {
 
     Groups.push(newGroup);
 
+    
+
     const currentUser = UsersList.find((user) => {
         return user.id === Number(authenticatedUserID);
     });
