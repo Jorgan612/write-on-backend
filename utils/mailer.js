@@ -1,6 +1,4 @@
-import jwt from 'jsonwebtoken';
-
-
+const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
 
 const transporter = nodemailer.createTransport({
