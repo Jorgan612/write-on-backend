@@ -35,7 +35,7 @@ router.get('/', verifyToken, (req, res) => {
     return res.status(200).json(authorizedGroups);
 });
 
-router.post('/', verifyToken, (req, res) => { 
+router.post('/', verifyToken, (req, res) => {
     const { name, meetings, invites, members, creationDate } = req.body;
     const  authenticatedUserID = req.user.id;
 
@@ -78,6 +78,62 @@ router.post('/', verifyToken, (req, res) => {
     }
 
     res.status(201).json({ message: 'Group created successfully!' });
+});
+
+router.post('/accept-invite', (req, res) => {
+    const { token } = req.body;
+
+    if (!token) {
+        return res.status(400).json({ status: 'error', message: 'Invitation token is required.' });
+    }
+
+    try {
+        const decoded = JsonWebTokenError.verify(token, process.env.JWT_SECRET);
+        const { email, groupId } = decoded;
+
+        const group = Groups.find((group) => {
+            return group.groupId === groupId;
+        })
+
+        if (!group) {
+            return res.status(404).json({ status: 'error', message: 'This group no longer exists.' });
+        }
+
+        const targetUser = UsersList.find((user) => {
+            return user.email.toLowerCase() === email.toLowerCase();
+        })
+
+        if (targetUser) {
+            if (!group.members.includes(targatUser.id)) {
+                group.members.push(targetUser.id);
+            }
+
+            group.invites = group.invites.filter((invite) => {
+                return invite.toLowerCase() !== email.toLowerCase();
+            })
+
+            if (!targetUser.groups) {
+                targetUser.groups = [];
+            }
+
+            if (!targetUser.groups.includes(groupId)) {
+                targetUser.groups.push(groupId);
+            }
+
+            return res.status(200).json({ staus: 'success', accountExists: true, message: 'Successfully joined the group!' });
+        } else {
+            return res.status(200).json({
+                status: 'success',
+                accountExists: false,
+                email: email,
+                groupId: groupdId,
+                message: 'Valid invitation found. Please create an account to join.'
+            });
+        }
+
+    } catch (error) {
+        return res.status(401).json({ status: 'error', message: 'Invitation link is invalid or expired.'})
+    }
 });
 
 router.get('/group/:groupId/excerpts', verifyToken, (req, res) => {
