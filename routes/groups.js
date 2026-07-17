@@ -1,4 +1,5 @@
 const verifyToken = require('../middleware/auth.js');
+const { sendGroupinviteEmail } = require('../utils/mailer.js');
 const { UsersList, Groups, Excerpts } = require('../mockData.js');
 const express = require('express');
 const router = express.Router();
@@ -54,8 +55,6 @@ router.post('/', verifyToken, (req, res) => {
 
     Groups.push(newGroup);
 
-    
-
     const currentUser = UsersList.find((user) => {
         return user.id === Number(authenticatedUserID);
     });
@@ -68,6 +67,14 @@ router.post('/', verifyToken, (req, res) => {
         currentUser.groups.push(newGroup.groupId);
     } else {
         console.warn(`Warning: Owner ID ${ownerID} not found in mock database.`);
+    }
+
+    if (newGroup.invites.length) {
+        const ownerName = currentUser ? currentUser.name : "A user";
+
+        newGroup.invites.forEach((email) => {
+            sendGroupinviteEmail(email, newGroup.name, ownerName, newGroup.groupId);
+        });
     }
 
     res.status(201).json({ message: 'Group created successfully!' });
