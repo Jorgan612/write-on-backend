@@ -44,9 +44,9 @@ router.post('/login', async (req, res) => {
 
 router.post('/signup', async (req, res) => {
     try {
-        const { email, password, username, pronouns, bio, website, socials, goals } = req.body;
-
-        const existingUser = await UsersList.find(user => user.email.toLowerCase() === email.toLowerCase());
+        const { email, password, username, pronouns, bio, website, socials, goals, joinGroupId } = req.body;
+        const formattedEmail = email.toLowerCase().trim();
+        const existingUser = await UsersList.find(user => user.email.toLowerCase() === formattedEmail);
 
         if (existingUser) {
             return res.status(400).json({ message: 'An account with this email already exists.'});
@@ -59,7 +59,7 @@ router.post('/signup', async (req, res) => {
         const newUser = {
             id: Date.now(),
             isVerified: false,
-            email,
+            email: formattedEmail,
             username,
             password: hashedPassword,
             pronouns,
@@ -73,9 +73,40 @@ router.post('/signup', async (req, res) => {
             verificationToken: verificationToken
         };
 
+        if (joinGroupId) {
+            const group = Groups.find((group) => {
+                return group.groupId === joinGroupId.toString();
+            })
+
+            if (group) {
+                const isInvited = group.invites.some(invite => invite.toLowerCase() === formattedEmail);
+
+                if (isInvited) { 
+                    group.invites = group.invites.filter((invite) => {
+                        return invite.toLowerCase() !== formattedEmail;
+                    })
+
+                    if (!group.members.includes(newUser.id)) {
+                        group.members.push(newUser.id);
+                    }
+
+                    newUser.isVerified = true;
+                    newUser.groups.push(group.groupId);
+                }
+            } else {
+                console.warn(`Signup invite warning: Group ID ${joinGroupId} was not found.`);
+            }
+        }
+
         UsersList.push(newUser);
 
-        await sendConfirmationEmail(newUser.email, newUser.username, verificationToken);
+        if (!newUser.isVerified) {
+            await sendConfirmationEmail(newUser.email, newUser.username, verificationToken);
+        }
+
+        if (joinGroupId && newUser.groups.includes(joinGroupId.toString())) {
+            return res.status(201).json({ message: 'Registration successful! You have successfully joined your group. Please check your emial to verify your account.'})
+        }
 
         res.status(201).json({ message: 'Registration successful! Please check your email to verify your account before logging in.' });
 

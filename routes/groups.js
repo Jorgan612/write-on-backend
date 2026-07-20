@@ -1,5 +1,5 @@
 const verifyToken = require('../middleware/auth.js');
-const { sendGroupinviteEmail } = require('../utils/mailer.js');
+const { sendGroupInviteEmail } = require('../utils/mailer.js');
 const { UsersList, Groups, Excerpts } = require('../mockData.js');
 const express = require('express');
 const router = express.Router();
@@ -35,7 +35,7 @@ router.get('/', verifyToken, (req, res) => {
     return res.status(200).json(authorizedGroups);
 });
 
-router.post('/', verifyToken, (req, res) => {
+router.post('/', verifyToken, async (req, res) => {
     const { name, meetings, invites, members, creationDate } = req.body;
     const  authenticatedUserID = req.user.id;
 
@@ -69,12 +69,33 @@ router.post('/', verifyToken, (req, res) => {
         console.warn(`Warning: Owner ID ${ownerID} not found in mock database.`);
     }
 
-    if (newGroup.invites.length) {
+    if (newGroup.invites && newGroup.invites.length) {
         const ownerName = currentUser ? currentUser.name : "A user";
+        try {
+            const emailPromises = newGroup.invites.map((email) => {
+                return sendGroupInviteEmail(email, newGroup.name, ownerName, newGroup.groupId);
+            });
 
-        newGroup.invites.forEach((email) => {
-            sendGroupinviteEmail(email, newGroup.name, ownerName, newGroup.groupId);
-        });
+            const results = await Promise.allSettled(emailPromises);
+
+            const failedEmails = [];
+
+            results.forEach((result, index) => {
+                if (result.status === 'rejected') {
+                    failedEmails.push(newGroup.invites[index]);
+                }
+            })
+
+            if (failedEmails.length) {
+                return res.status(201).json({
+                    message: 'Group created, but some invitations failed to deliver.',
+                    failedInvites: failedEmails
+                })
+            }
+
+        } catch (error) {
+            console.error('Error processing invitation email queue:', error);
+        }
     }
 
     res.status(201).json({ message: 'Group created successfully!' });

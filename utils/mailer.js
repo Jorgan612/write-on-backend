@@ -99,22 +99,23 @@ const sendGroupInviteEmail = async (toEmail, groupName, ownerName, groupId) => {
             subject: `You've been invited to join ${groupName} on Write On!`,
             html: `
             <div style="font-family: sans-serif; padding: 20px; color: #333; max-width: 600px; margin 0 auto;">
-                <h2>You've been invited!</h2>
-                <p><strong>${ownerName}</strong> invites you to join the group <strong>${groupName}</strong>. Click the button below to view your invitation and get started.</p>
-                <div style="margin: 30px 0;">
-                    <a href="${inviteUrl}" style="background-color: #263b56; color: #94a3b8; font-weight: bold; padding: 12px 24px; text-decoration: none; border-radius: 5px; display: inline-block;">
-                        View Invitation
-                    </a>
-                </div>
-                <hr style="border: none; border-top: 1px solid #eee; margin: 20px 0;" />
-                <p>Happy writing!</p>
-                <br>
-                <p>- The Write On Team</p>
+            <h2>You've been invited!</h2>
+            <p><strong>${ownerName}</strong> invites you to join the group <strong>${groupName}</strong>. Click the button below to view your invitation and get started.</p>
+            <div style="margin: 30px 0;">
+            <a href="${inviteUrl}" style="background-color: #263b56; color: #94a3b8; font-weight: bold; padding: 12px 24px; text-decoration: none; border-radius: 5px; display: inline-block;">
+            View Invitation
+            </a>
+            </div>
+            <hr style="border: none; border-top: 1px solid #eee; margin: 20px 0;" />
+            <p>Happy writing!</p>
+            <br>
+            <p>- The Write On Team</p>
             </div>
             `
         }
 
-       
+        await transporter.sendMail(mailOptions);
+        console.log('Group invitation email sent succssfully');
 
     } catch (err) {
         console.error(`Failed to send invitation email to: ${toEmail} - Error:`, err);
