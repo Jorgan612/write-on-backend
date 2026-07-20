@@ -82,9 +82,7 @@ const sendPasswordResetEmail = async (toEmail, token) => {
 };
 
 const sendGroupInviteEmail = async (toEmail, groupName, ownerName, groupId) => {
-
     try {
-
         const inviteToken = jwt.sign(
             { email: toEmail, groupId: groupId },
             process.env.JWT_SECRET,
@@ -107,16 +105,14 @@ const sendGroupInviteEmail = async (toEmail, groupName, ownerName, groupId) => {
             </a>
             </div>
             <hr style="border: none; border-top: 1px solid #eee; margin: 20px 0;" />
-            <p>Happy writing!</p>
+            <p>Happy writing,</p>
             <br>
-            <p>- The Write On Team</p>
+            <p>The Write On Team</p>
             </div>
             `
         }
 
         await transporter.sendMail(mailOptions);
-        console.log('Group invitation email sent succssfully');
-
     } catch (err) {
         console.error(`Failed to send invitation email to: ${toEmail} - Error:`, err);
     }
