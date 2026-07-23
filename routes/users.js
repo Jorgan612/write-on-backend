@@ -100,12 +100,23 @@ router.post('/signup', async (req, res) => {
 
         UsersList.push(newUser);
 
+        if (joinedGroupId && newUser.groups.includes(joinGroupId.toString())) {
+            const sessionToken = jwt.sign({ id: newUser.id }, process.env.JWT_SECRET, { expiresIn: '30D'});
+            const { password: _, ...userWithoutPw } = newUser;
+
+            return res.status(201).json({
+                message: 'Welcome to Write On!',
+                token: sessionToken,
+                user: userWithoutPw
+            });
+        }
+
         if (!newUser.isVerified) {
             await sendConfirmationEmail(newUser.email, newUser.username, verificationToken);
         }
 
         if (joinGroupId && newUser.groups.includes(joinGroupId.toString())) {
-            return res.status(201).json({ message: 'Registration successful! You have successfully joined your group. Please check your emial to verify your account.'})
+            return res.status(201).json({ message: 'Registration successful! You have successfully joined your group. Please check your email to verify your account.'})
         }
 
         res.status(201).json({ message: 'Registration successful! Please check your email to verify your account before logging in.' });

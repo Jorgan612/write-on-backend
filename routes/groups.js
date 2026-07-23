@@ -131,7 +131,7 @@ router.post('/accept-invite', (req, res) => {
 
             group.invites = group.invites.filter((invite) => {
                 return invite.toLowerCase() !== email.toLowerCase();
-            })
+            });
 
             if (!targetUser.groups) {
                 targetUser.groups = [];
@@ -141,16 +141,19 @@ router.post('/accept-invite', (req, res) => {
                 targetUser.groups.push(groupId);
             }
 
-            return res.status(200).json({ staus: 'success', accountExists: true, message: 'Successfully joined the group!' });
-        } else {
-            return res.status(200).json({
-                status: 'success',
-                accountExists: false,
-                email: email,
-                groupId: groupdId,
-                message: 'Valid invitation found. Please create an account to join.'
-            });
+            const sessionToken = jwt.sign({ id: targetUser.id }, process.env.JWT_SECRET, { expiresIn: '30d' });
+            const { password:_, ...userWithoutPw } = targetUser;
+
+            return res.status(200).json({ staus: 'success', accountExists: true, token: sessionToken, user: userWithoutPw, message: 'Successfully joined the group!' });
         }
+        
+        return res.status(200).json({
+            status: 'success',
+            accountExists: false,
+            email: email,
+            groupId: groupdId,
+            message: 'Valid invitation found. Please create an account to join.'
+        });
 
     } catch (error) {
         return res.status(401).json({ status: 'error', message: 'Invitation link is invalid or expired.'})
